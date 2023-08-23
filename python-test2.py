@@ -47,7 +47,7 @@ try:
         zf.extractall(extract_dir)
     print('Архив распакован ', str(datetime.datetime.now().time()))
 except zipfile.BadZipFile as e: 
-    print('Ошибка при распаковки архива :' + str(e))
+    print('Ошибка при распаковки архива :', str(e))
 
 
 # #Удаляем папки и файлы, оставляем только папку или файл заданный пользователем
@@ -63,7 +63,7 @@ try:
         patsh_dir = os.getcwd() + chank_path + '/' + str(arr_names[0])
         arr_names = os.listdir(path = os.getcwd() + chank_path + '/' + arr_names[0])
 
-    print('Содержание каталога :' + str(arr_names), str(datetime.datetime.now().time()))
+    print('Содержание каталога :', str(arr_names), str(datetime.datetime.now().time()))
 
 # Указываем папку или относительный путь который следует оставить, далее удаляем все
     name_child = input('Введи папку или относительный путь, для импорта : ')
@@ -78,14 +78,14 @@ try:
 
     for item in arr_names:
         if os.path.isfile(patsh_dir + item) and item != name_child:
-            print('Это файл на удаление : ' + item, str(datetime.datetime.now().time()))
+            print('Это файл на удаление : ', item, str(datetime.datetime.now().time()))
             os.remove(patsh_dir + item)
             print('Файл удален ', str(datetime.datetime.now().time()))
         
 
         if os.path.isdir(patsh_dir + item) and item != name_child:
             try:
-                print('Это каталог на удаление: ' + item, str(datetime.datetime.now().time()))
+                print('Это каталог на удаление: ', item, str(datetime.datetime.now().time()))
                 os.rmdir(patsh_dir + item)
                 print('Каталог удален ', str(datetime.datetime.now().time()))
             except OSError as e:
@@ -94,7 +94,7 @@ try:
 
     
 except FileNotFoundError as e:
-    print('Заданный путь файла или каталога не существует :' + str(e), str(datetime.datetime.now().time()))
+    print('Заданный путь файла или каталога не существует :', str(e), str(datetime.datetime.now().time()))
 
 # Создаем файл версии или перезаписываем имеющийся
 
@@ -120,7 +120,7 @@ service_file.write(
 + ' \n }'
                    )
 service_file.close()
-print('Запись файла версии ' + str(datetime.datetime.now().time()))
+print('Запись файла версии ', str(datetime.datetime.now().time()))
 
 
 # Записываем архив. Удаляем загруженный репозиторий и папку
@@ -132,18 +132,18 @@ with zipfile.ZipFile(name_child + str(form_dat).replace('-', '') + '.zip', "w") 
     arr_names = os.listdir(patsh_dir + '/' + name_child)
     for item in arr_names:
         path = os.path.join(patsh_dir + '/' + name_child, item)
-        print("Запись в архив :" + path + " :" + str(datetime.datetime.now().time()))
+        print("Запись в архив :" + path + " :", str(datetime.datetime.now().time()))
         if os.path.isdir(path):
             print('Это папка')
             child_dir = os.listdir(path)
             for it in child_dir:
-                print('Запись вложенной папки. Файл :' + it + ' :' + str(datetime.datetime.now().time()))
+                print('Запись вложенной папки. Файл :' + it + ' :', str(datetime.datetime.now().time()))
                 myzip.write(path + '/' + it)
         
         myzip.write(path)
 
-print('Удаление созданных каталогов через 5 секунд' + str(datetime.datetime.now().time()))
+print('Удаление созданных каталогов через 5 секунд', str(datetime.datetime.now().time()))
 time.sleep(5)
 shutil.rmtree(os.getcwd() + chank_path)
 os.remove(os.getcwd() + '/' + 'main.zip')
-print('Удалено ' + str(datetime.datetime.now().time()))
+print('Удалено ', str(datetime.datetime.now().time()))
